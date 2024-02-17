@@ -1,0 +1,26 @@
+name: DemoBukkitPlugin
+version: '${version}'
+main: fr.demo.DemoBukkitPlugin
+api-version: '1.20'
+author: YourName
+commands:
+  ping:
+    description: Renvoie un pong
+    permission: demobukkitplugin.ping
+    aliases: [ p ]
+  message:
+    description: Envoie un message à un joueur
+    permission: demobukkitplugin.message
+    aliases: [ m ]
+  gui:
+    description: Ouvre une interface graphique
+    default: true
+    aliases: [ g ]
+
+permissions:
+  demobukkitplugin.ping:
+    description: Permission de base pour /ping
+    default: true
+  demobukkitplugin.message:
+    description: Permission de base pour /message
+    default: true
