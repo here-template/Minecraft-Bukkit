@@ -40,7 +40,7 @@ public class GUIManager {
 
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', entry.getName()));
 
-        if (entry.getLore() != null && entry.getLore().size() > 0) {
+        if (entry.getLore() != null && !entry.getLore().isEmpty()) {
             ArrayList<String> lore = new ArrayList<>();
             for (String currentLine : entry.getLore()) {
                 String line = ChatColor.translateAlternateColorCodes('&', currentLine);
