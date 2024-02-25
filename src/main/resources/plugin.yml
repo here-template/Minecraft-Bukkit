@@ -16,6 +16,10 @@ commands:
     description: Ouvre une interface graphique
     default: true
     aliases: [ g ]
+  addinfo:
+    description: Ajoute des informations à un joueur dans la DB
+    default: true
+    aliases: [ addi ]
 
 permissions:
   demobukkitplugin.ping:

@@ -1,8 +1,10 @@
 package fr.demo;
 
+import fr.demo.commands.AddInfoCommand;
 import fr.demo.commands.GuiCommand;
 import fr.demo.commands.MessageCommand;
 import fr.demo.commands.PingCommand;
+import fr.demo.database.DatabaseManager;
 import fr.demo.gui.utils.GUIManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
@@ -14,6 +16,7 @@ import java.util.Objects;
 public final class DemoBukkitPlugin extends JavaPlugin implements Listener {
 
     private GUIManager guiManager; // GUIManager instance
+    private DatabaseManager databaseManager; // DatabaseManager instance for MySQL
 
     /**
      * This method is called when the plugin is enabled
@@ -26,8 +29,10 @@ public final class DemoBukkitPlugin extends JavaPlugin implements Listener {
         Objects.requireNonNull(getCommand("ping")).setExecutor(new PingCommand()); // Register command ping
         Objects.requireNonNull(getCommand("message")).setExecutor(new MessageCommand()); // Register command message
         Objects.requireNonNull(getCommand("gui")).setExecutor(new GuiCommand()); // Register command gui
+        Objects.requireNonNull(getCommand("addinfo")).setExecutor(new AddInfoCommand()); // Register command addinfo
 
         getServer().getPluginManager().registerEvents(this, this); // Register the events for @EventHandler
+        databaseManager = new DatabaseManager(); // Create a new DatabaseManager for start connection to MySQL
     }
 
     /**
@@ -35,7 +40,8 @@ public final class DemoBukkitPlugin extends JavaPlugin implements Listener {
      */
     @Override
     public void onDisable() {
-        getLogger().info("DemoBukkitPlugin is disabled");
+        databaseManager.close(); // Close the connection to MySQL
+        getLogger().info("DemoBukkitPlugin is disabled"); // This is a log message in the console
     }
 
     /**
@@ -64,6 +70,15 @@ public final class DemoBukkitPlugin extends JavaPlugin implements Listener {
      */
     public GUIManager getGuiManager() {
         return guiManager;
+    }
+
+    /**
+     * This method get DatabaseManager instance
+     *
+     * @return DatabaseManager instance
+     */
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
     }
 
     /**
